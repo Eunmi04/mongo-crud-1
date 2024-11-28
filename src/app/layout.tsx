@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
-import Navbar from '../components/Navbar'
+import Navbar from '@/components/Navbar'
+import { NextAuthProvider } from '@/components/Providers'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -15,7 +16,7 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'MongoDB CRUB',
+  title: 'MongoDB CRUD',
   description: 'Create, Read, Update, and Delete in MongoDB',
 }
 
@@ -29,10 +30,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="max-w-4xl mx-auto">
-          <Navbar />
-          <div className="mt-8">{children}</div>
-        </div>
+        <NextAuthProvider>
+          {/* 폭정렬 */}
+          <div className="max-w-4xl mx-auto">
+            <Navbar />
+            <div className="mt-8">{children}</div>
+          </div>
+        </NextAuthProvider>
       </body>
     </html>
   )
